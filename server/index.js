@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 // import routes
 const patientRoute = require("./routes/patient");
 const doctorRoute = require("./routes/doctor");
+const appointmentRoute = require("./routes/appointment");
 dotenv.config();
 
 // connect to database
@@ -27,6 +28,7 @@ app.use(express.json());
 // routes
 app.use("/patient", patientRoute);
 app.use("/doctor", doctorRoute);
+app.use("/appointment", appointmentRoute);
 
 app.get("/", (req, res) => {
   res.send("ok nice");
