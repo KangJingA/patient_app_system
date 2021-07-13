@@ -1,23 +1,23 @@
 const mongoose = require("mongoose");
 
 const PatientSchema = new mongoose.Schema({
-    id: {
+    patient_id: {
         type: String,
         required: true,
         min: 6,
         max: 255
     },
-    name: {
+    patient_name: {
         type: String,
         required: true,
         min: 6,
         max: 255
     },
-    age: {
+    patient_age: {
         type: Number,
         required: true,
     },
-    gender: {
+    patient_gender: {
         type: String,
         required: true,
         min: 6,
