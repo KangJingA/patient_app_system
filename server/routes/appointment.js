@@ -53,10 +53,8 @@ router.get("/createdata", async (req, res) => {
   res.send(savedData1);
 });
 
-// for doctor
 // get all appointments for the given doctor and date
-// change to post
-router.get("/patientappointments", async (req, res) => {
+router.post("/patientappointments", async (req, res) => {
   const patientAppointments = await Appointment.aggregate([
     {
       $match: {
@@ -92,12 +90,12 @@ router.get("/patientappointments", async (req, res) => {
 });
 
 // fix appointment by patient, doctor, date and time
-// works
-router.post("/fixappointment", async (req, res) => {
+router.post("/appointment", async (req, res) => {
   const date_time = new Date(req.body.date + " " + req.body.time);
   const appointmentExist = await Appointment.findOne({
     patient_id: req.body.patient_id,
     doctor_id: req.body.doctor_id,
+    appointment_date_time: date_time,
   });
   if (appointmentExist)
     return res.status(400).send("appointment already exists");
@@ -119,20 +117,25 @@ router.post("/fixappointment", async (req, res) => {
 });
 
 // cancel appointment by patient, doctor, date and time
+router.delete("/appointment", async (req, res) => {
+  const date_time = new Date(req.body.date + " " + req.body.time);
+
+  const appointmentExist = await Appointment.findOne({
+    patient_id: req.body.patient_id,
+    doctor_id: req.body.doctor_id,
+    appointment_date_time: date_time,
+  });
+
+  if (!appointmentExist)
+    return res.status(400).send("appointment does not exist");
+
+  const result = await Appointment.deleteOne({
+    patient_id: req.body.patient_id,
+    doctor_id: req.body.doctor_id,
+    appointment_date_time: date_time,
+  });
+
+  res.send(result);
+});
 
 module.exports = router;
-
-//   const patientAppointments = await Appointment.find(
-
-//     // answers question 2
-//     {
-//       //query today up to tonight
-//       appointment_date_time: {
-//         $gte: new Date("08 Mar 2018"),
-//         $lt: new Date("09 Mar 2018"),
-//       },
-//       doctor_id: "D1",
-//     //   patient_id: "P1"
-//     }
-
-//   );
