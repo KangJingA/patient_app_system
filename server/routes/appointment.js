@@ -1,6 +1,27 @@
 const router = require("express").Router();
 const Appointment = require("../model/Appointment");
 
+const parsePatientAppointment = async (patientAppointment) => {
+  return {
+    doctor_id: patientAppointment.doctor_id,
+    doctor_name: patientAppointment.doctor[0].doctor_name,
+    patient_id: patientAppointment.patient_id,
+    patient_name: patientAppointment.patient[0].patient_name,
+    patient_age: patientAppointment.patient[0].patient_age,
+    patient_gender: patientAppointment.patient[0].patient_gender,
+    appointment_id: patientAppointment.appointment_id,
+    appointment_date_time: patientAppointment.appointment_date_time,
+  };
+};
+
+const getAppointments = async (patientAppointments) => {
+  return Promise.all(
+    patientAppointments.map((appointment) =>
+      parsePatientAppointment(appointment)
+    )
+  );
+};
+
 router.get("/", (req, res) => {
   res.send("appointment route is working");
 });
@@ -32,6 +53,7 @@ router.get("/createdata", async (req, res) => {
   res.send(savedData1);
 });
 
+// for doctor
 // get all appointments for the given doctor and date
 // change to post
 router.get("/patientappointments", async (req, res) => {
@@ -64,11 +86,37 @@ router.get("/patientappointments", async (req, res) => {
     },
   ]);
 
-  console.log(patientAppointments);
-  res.send(patientAppointments);
+  const parsedData = await getAppointments(patientAppointments);
+
+  res.send(parsedData);
 });
 
 // fix appointment by patient, doctor, date and time
+// works
+router.post("/fixappointment", async (req, res) => {
+  const date_time = new Date(req.body.date + " " + req.body.time);
+  const appointmentExist = await Appointment.findOne({
+    patient_id: req.body.patient_id,
+    doctor_id: req.body.doctor_id,
+  });
+  if (appointmentExist)
+    return res.status(400).send("appointment already exists");
+
+  // create appointment
+  const appointment = new Appointment({
+    patient_id: req.body.patient_id,
+    doctor_id: req.body.doctor_id,
+    appointment_date_time: date_time,
+  });
+
+  try {
+    const savedAppointment = await appointment.save();
+    console.log(savedAppointment);
+    res.send(savedAppointment);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
 
 // cancel appointment by patient, doctor, date and time
 
