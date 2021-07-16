@@ -80,7 +80,6 @@ router.post("/patientAppointments", async (req, res) => {
   ]);
 
   const parsedData = await getAppointments(patientAppointments);
-  res.header('Access-Control-Allow-Origin', "*")
   res.send(parsedData);
 });
 

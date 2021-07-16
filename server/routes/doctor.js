@@ -5,12 +5,26 @@ const parseDoctor = async (doctor) => {
   return { doctor_id: doctor.doctor_id, doctor_name: doctor.doctor_name };
 };
 
+const getDoctors = async (doctors) => {
+  return Promise.all(doctors.map((doctor) => parseDoctor(doctor)));
+};
+
 router.get("/", (req, res) => {
   res.send("doctor route is working");
 });
 
+// getDoctors
+router.post("./getDoctors", async (req, res) => {
+  const doctors = await Doctor.find({});
+  const parsedData = await getDoctors(doctors);
+  res.send(parsedData);
+});
+
 router.post("/getDoctor", async (req, res) => {
-  const doctor = await Doctor.findOne({ doctor_id: req.body.doctor_id, doctor_name: req.body.doctor_name});
+  const doctor = await Doctor.findOne({
+    doctor_id: req.body.doctor_id,
+    doctor_name: req.body.doctor_name,
+  });
 
   if (!doctor) {
     res.statusMessage = "invalid name and id";
