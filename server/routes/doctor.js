@@ -10,10 +10,10 @@ router.get("/", (req, res) => {
 });
 
 router.post("/getDoctor", async (req, res) => {
-  const doctor = await Doctor.findOne({ doctor_id: req.body.doctor_id });
+  const doctor = await Doctor.findOne({ doctor_id: req.body.doctor_id, doctor_name: req.body.doctor_name});
 
   if (!doctor) {
-    res.statusMessage = "doctor does not exist";
+    res.statusMessage = "invalid name and id";
     return res.status(403).end(); // 403 forbidden cos login
   }
 

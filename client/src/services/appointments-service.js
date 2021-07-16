@@ -72,7 +72,7 @@ const AppointmentsService = {
       body: JSON.stringify(data),
     })
       .then((res) => {
-        if (res.status == 400) return res.text();
+        if (res.status === 400) return res.text();
         return res.json();
       })
       .catch((err) => {
@@ -92,7 +92,7 @@ const AppointmentsService = {
       body: JSON.stringify(data),
     })
       .then((res) => {
-        if (res.status == 400) return res.text();
+        if (res.status === 400) return res.text();
         return res.json();
       })
       .catch((err) => {
