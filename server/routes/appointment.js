@@ -1,7 +1,9 @@
+const { startOfDay, endOfDay } = require("date-fns");
+
 const router = require("express").Router();
 const Appointment = require("../model/Appointment");
 
-const parsePatientAppointment = async (patientAppointment) => {
+const parseAppointment = async (patientAppointment) => {
   return {
     doctor_id: patientAppointment.doctor_id,
     doctor_name: patientAppointment.doctor[0].doctor_name,
@@ -16,9 +18,7 @@ const parsePatientAppointment = async (patientAppointment) => {
 
 const getAppointments = async (patientAppointments) => {
   return Promise.all(
-    patientAppointments.map((appointment) =>
-      parsePatientAppointment(appointment)
-    )
+    patientAppointments.map((appointment) => parseAppointment(appointment))
   );
 };
 
@@ -53,17 +53,12 @@ router.get("/createdata", async (req, res) => {
   res.send(savedData1);
 });
 
-// get all appointments for the given doctor and date
-router.post("/patientappointments", async (req, res) => {
+// get appointments by patient id
+router.post("/patientAppointments", async (req, res) => {
   const patientAppointments = await Appointment.aggregate([
     {
       $match: {
-        doctor_id: "D1", // take from req.body
-        appointment_date_time: {
-          // take from req.body
-          $gte: new Date("08 Mar 2018"),
-          $lt: new Date("09 Mar 2018"),
-        },
+        patient_id: req.body.patient_id,
       },
     },
     {
@@ -85,6 +80,73 @@ router.post("/patientappointments", async (req, res) => {
   ]);
 
   const parsedData = await getAppointments(patientAppointments);
+
+  res.send(parsedData);
+});
+
+// get appointments by doctor id
+router.post("/doctorAppointments", async (req, res) => {
+  const doctorAppointments = await Appointment.aggregate([
+    {
+      $match: {
+        doctor_id: req.body.doctor_id,
+      },
+    },
+    {
+      $lookup: {
+        from: "patients",
+        localField: "patient_id",
+        foreignField: "patient_id",
+        as: "patient",
+      },
+    },
+    {
+      $lookup: {
+        from: "doctors",
+        localField: "doctor_id",
+        foreignField: "doctor_id",
+        as: "doctor",
+      },
+    },
+  ]);
+
+  const parsedData = await getAppointments(doctorAppointments);
+
+  res.send(parsedData);
+});
+
+// get all appointments for the given doctor and date
+router.post("/doctorAppointmentsByDate", async (req, res) => {
+  // smth to parse here
+  const doctorAppointmentsByDate = await Appointment.aggregate([
+    {
+      $match: {
+        doctor_id: req.body.doctor_id, // take from req.body
+        appointment_date_time: {
+          $gte: startOfDay(new Date(req.body.date)),
+          $lt: endOfDay(new Date(req.body.date)),
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: "patients",
+        localField: "patient_id",
+        foreignField: "patient_id",
+        as: "patient",
+      },
+    },
+    {
+      $lookup: {
+        from: "doctors",
+        localField: "doctor_id",
+        foreignField: "doctor_id",
+        as: "doctor",
+      },
+    },
+  ]);
+
+  const parsedData = await getAppointments(doctorAppointmentsByDate);
 
   res.send(parsedData);
 });
@@ -139,3 +201,12 @@ router.delete("/appointment", async (req, res) => {
 });
 
 module.exports = router;
+
+// $match: {
+//   doctor_id: "D1", // take from req.body
+//   appointment_date_time: {
+//     // take from req.body
+//     $gte: new Date("08 Mar 2018"),
+//     $lt: new Date("09 Mar 2018"),
+//   },
+// },

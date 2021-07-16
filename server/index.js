@@ -31,7 +31,7 @@ app.use("/doctor", doctorRoute);
 app.use("/appointment", appointmentRoute);
 
 app.get("/", (req, res) => {
-  res.send("ok nice");
+  res.send("server is working");
 });
 
 const port = process.env.PORT || 5000;
