@@ -1,8 +1,8 @@
-import "./FixAppointmentPopup.css";
+import "./Popup.css";
 import FixAppointmentForm from "../../components/Form/FixAppointmentForm";
 const FixAppointmentPopup = ({ toggleAppointmentPopup, id }) => {
   return (
-    <div className="popup">
+    <div className="popup background-white">
       Fix appointment
       <FixAppointmentForm
         id={id}

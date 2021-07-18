@@ -1,0 +1,42 @@
+.popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  position: absolute;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+}
+
+.background-white {
+  background-color: white;
+}
+
+.background-black {
+  background-color: black;
+  opacity: 0.7;
+}
+
+.popup-card-container {
+  background: #ffffff;
+  box-shadow: 0px 24px 24px #0000004d;
+  border: 0.5px #ffffffcc;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  height: 100px;
+  width: 200px;
+  padding: 20px;
+}
+
+.popup-button-container {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Switch, Route, Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import FixAppointmentPopup from "../../components/Popup/FixAppointmentPopup";
+import DeleteAppointmentPopup from "../../components/Popup/DeleteAppointmentPopup";
 import Table from "../Table/Table";
 import AppointmentsService from "../../services/appointments-service";
 import LoginService from "../../services/login-service";
@@ -9,6 +10,7 @@ import "./MainPage.css";
 
 const MainPage = () => {
   let { id } = useParams();
+  const [appointmentToDelete, setAppointmentToDelete] = useState({});
   const [tableDataState, setTableDataState] = useState([]);
   const [isPopupDisplayed, setIsPopupDisplayed] = useState(false);
 
@@ -25,8 +27,10 @@ const MainPage = () => {
   useEffect(() => {
     if (tableDataState.length === 0) return;
     if (isPopupDisplayed) return;
+    if (Object.getOwnPropertyNames(appointmentToDelete).length === 0) return;
+
     // do the display trick to refresh creation of table
-  }, [tableDataState,isPopupDisplayed]);
+  }, [tableDataState, isPopupDisplayed, appointmentToDelete]);
 
   // do smth about the usecallback here
   const getPatientAppointments = async (patientData) => {
@@ -47,10 +51,10 @@ const MainPage = () => {
     setIsPopupDisplayed(!isPopupDisplayed);
   };
 
-  const handleDoctorDateQuery = (e) => {
-    e.preventDefault();
-    console.log(e);
+  const closeDeleteAppointmentPopup = () => {
+    setAppointmentToDelete({});
   };
+
   if (!LoginService.isLoggedIn()) {
     return <Redirect to="/login" />;
   }
@@ -76,13 +80,23 @@ const MainPage = () => {
       {tableDataState.length === 0 ? (
         "Loading Data"
       ) : (
-        <Table tableDataState={tableDataState} />
+        <Table
+          tableDataState={tableDataState}
+          setAppointmentToDelete={setAppointmentToDelete}
+        />
       )}
 
       {isPopupDisplayed && (
         <FixAppointmentPopup
           id={id}
           toggleAppointmentPopup={toggleAppointmentPopup}
+        />
+      )}
+
+      {Object.getOwnPropertyNames(appointmentToDelete).length !== 0 && (
+        <DeleteAppointmentPopup
+          closeDeleteAppointmentPopup={closeDeleteAppointmentPopup}
+          appointmentToDelete={appointmentToDelete}
         />
       )}
     </div>

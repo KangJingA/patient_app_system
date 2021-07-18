@@ -3,7 +3,14 @@ import { useTable, useSortBy } from "react-table";
 import { Columns } from "./Columns";
 
 import "./Table.css";
-const Table = ({ tableDataState }) => {
+const parseAppointment = (row) => {
+  return {
+    patient_id: row.original.patient_id,
+    doctor_id: row.original.doctor_id,
+    appointment_date_time: row.original.appointment_date_time,
+  };
+};
+const Table = ({ tableDataState, setAppointmentToDelete }) => {
   const columns = useMemo(() => Columns, []);
   const data = useMemo(() => tableDataState, [tableDataState]);
 
@@ -13,14 +20,26 @@ const Table = ({ tableDataState }) => {
         columns: columns,
         data: data,
       },
-      useSortBy
+      useSortBy,
+      (hooks) => {
+        hooks.visibleColumns.push((columns) => [
+          ...columns,
+          {
+            id: "delete",
+            Header: "",
+            Cell: ({ row }) => (
+              <div
+                onClick={(e) => {
+                  setAppointmentToDelete(parseAppointment(row));
+                }}
+              >
+                Delete
+              </div>
+            ),
+          },
+        ]);
+      }
     );
-
-  // thead: table head
-  // tbody: table body
-  // tr: table row -> put the cells in the rows
-  // th: table header cell -> bold and centered by default
-  // td: table data cell -> regular and left-aligned by default
 
   return (
     <table {...getTableProps()}>

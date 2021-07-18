@@ -179,12 +179,10 @@ router.post("/appointment", async (req, res) => {
 
 // cancel appointment by patient, doctor, date and time
 router.delete("/appointment", async (req, res) => {
-  const date_time = new Date(req.body.date + " " + req.body.time);
-
   const appointmentExist = await Appointment.findOne({
     patient_id: req.body.patient_id,
     doctor_id: req.body.doctor_id,
-    appointment_date_time: date_time,
+    appointment_date_time: req.body.appointment_date_time,
   });
 
   if (!appointmentExist)
@@ -193,7 +191,7 @@ router.delete("/appointment", async (req, res) => {
   const result = await Appointment.deleteOne({
     patient_id: req.body.patient_id,
     doctor_id: req.body.doctor_id,
-    appointment_date_time: date_time,
+    appointment_date_time: req.body.appointment_date_time,
   });
 
   res.send(result);
