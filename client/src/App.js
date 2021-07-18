@@ -1,17 +1,20 @@
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
-import MainPage from "./components/Page/MainPage";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Header from "./components/Header/Header";
+import MainPage from "./components/Page/MainPage";
 import LoginPage from "./components/Page/LoginPage";
+import LoginService from "./services/login-service";
 
 function App() {
+  if (!LoginService.isLoggedIn()) {
+    return <Redirect to="/login" />;
+  }
   return (
     <div className="App">
       <Route path="/" component={Header} />
 
       <Switch>
-        <Route path="/" component={MainPage} />
-        <Route path="/login" component={LoginPage} />
+        <Route exact path="/:id" component={MainPage} />
       </Switch>
     </div>
   );

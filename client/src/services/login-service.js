@@ -3,9 +3,10 @@ import PatientService from "./patient-service";
 const sessionStore = window.sessionStorage;
 
 const LoginService = {
-  
   isLoggedIn() {
-    return sessionStore.getItem("username") && sessionStore.getItem("id") ? true : false;
+    return sessionStore.getItem("username") && sessionStore.getItem("id")
+      ? true
+      : false;
   },
 
   setLoginDetails(isDoctor, result) {
@@ -18,7 +19,7 @@ const LoginService = {
     }
   },
 
-  async login (id, name, isDoctor) {
+  async login(id, name, isDoctor) {
     let result;
 
     if (isDoctor) {
@@ -35,11 +36,16 @@ const LoginService = {
 
     if (typeof result === "string") return result;
     this.setLoginDetails(isDoctor, result);
+    return true;
   },
 
   logout() {
     sessionStore.removeItem("id");
     sessionStore.removeItem("username");
+  },
+
+  getID() {
+    return sessionStore.getItem("id");
   },
 };
 export default LoginService;
