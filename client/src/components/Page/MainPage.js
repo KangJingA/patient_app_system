@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Switch, Route, Redirect, useParams } from "react-router-dom";
+import FixAppointmentPopup from "../../components/Popup/FixAppointmentPopup";
 import Table from "../Table/Table";
 import AppointmentsService from "../../services/appointments-service";
 import LoginService from "../../services/login-service";
@@ -9,6 +10,7 @@ import "./MainPage.css";
 const MainPage = () => {
   let { id } = useParams();
   const [tableDataState, setTableDataState] = useState([]);
+  const [isPopupDisplayed, setIsPopupDisplayed] = useState(false);
 
   let isDoctor = id[0] === "D";
 
@@ -20,9 +22,9 @@ const MainPage = () => {
     }
   }, []);
 
-  useEffect(() =>{
+  useEffect(() => {
     if (tableDataState.length === 0) return;
-  }, [tableDataState])
+  }, [tableDataState]);
 
   // do smth about the usecallback here
   const getPatientAppointments = async (patientData) => {
@@ -39,8 +41,8 @@ const MainPage = () => {
     setTableDataState(response);
   };
 
-  const handleBookAppointment = () => {
-    console.log("hi");
+  const toggleAppointmentPopup = () => {
+    setIsPopupDisplayed(!isPopupDisplayed);
   };
 
   const handleDoctorDateQuery = (e) => {
@@ -56,14 +58,14 @@ const MainPage = () => {
       <div className="subheader">
         <p>Your scheduled consultations:</p>
         {!isDoctor && (
-          <button className="button" onClick={handleBookAppointment}>
+          <button className="button" onClick={toggleAppointmentPopup}>
             Book an appointment
           </button>
         )}
 
         {isDoctor && (
           <QueryByDateForm
-            id ={id}
+            id={id}
             setTableDataState={setTableDataState}
           ></QueryByDateForm>
         )}
@@ -73,6 +75,10 @@ const MainPage = () => {
         "Loading Data"
       ) : (
         <Table tableDataState={tableDataState} />
+      )}
+
+      {isPopupDisplayed && (
+        <FixAppointmentPopup />
       )}
     </div>
   );

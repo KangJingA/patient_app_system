@@ -14,8 +14,9 @@ router.get("/", (req, res) => {
 });
 
 // getDoctors
-router.post("./getDoctors", async (req, res) => {
+router.get("/getDoctors", async (req, res) => {
   const doctors = await Doctor.find({});
+  console.log(doctors)
   const parsedData = await getDoctors(doctors);
   res.send(parsedData);
 });
