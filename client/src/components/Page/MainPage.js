@@ -1,11 +1,10 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-
-import { useState, useEffect } from "react";
-import Table from "../Table/Table";
-import AppointmentsService from "../../services/appointments-service";
+import LoginService from "../../services/login-service";
+// import { useState, useEffect } from "react";
+// import Table from "../Table/Table";
+// import AppointmentsService from "../../services/appointments-service";
 const MainPage = () => {
-
   // check if doctor or patient
   // const [tableDataState, setTableDataState] = useState([]);
 
@@ -31,19 +30,15 @@ const MainPage = () => {
   //   setTableDataState(response);
   // };
   // return <div>{tableDataState.length === 0 ? "Loading Data" : <Table tableDataState={tableDataState}/>}</div>;
-  const isLoggedIn = true;
 
-  if (!isLoggedIn) {
+  if (!LoginService.isLoggedIn()) {
     return <Redirect to="/login" />;
   }
-  
-  return (
-    <div>hey</div>
-  )
+
+  return <div>hey</div>;
 };
 
 export default MainPage;
-
 
 // // import AppointmentsService from "./services/appointments-service";
 // import PatientService from "./services/patient-service";

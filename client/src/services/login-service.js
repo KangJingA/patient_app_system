@@ -3,10 +3,9 @@ import PatientService from "./patient-service";
 const sessionStore = window.sessionStorage;
 
 const LoginService = {
-  // isLoggedIn
-  // login
+  
   isLoggedIn() {
-    return sessionStore("username") && sessionStore("id") ? true : false;
+    return sessionStore.getItem("username") && sessionStore.getItem("id") ? true : false;
   },
 
   setLoginDetails(isDoctor, result) {
@@ -19,7 +18,7 @@ const LoginService = {
     }
   },
 
-  login(id, name, isDoctor) {
+  async login (id, name, isDoctor) {
     let result;
 
     if (isDoctor) {
