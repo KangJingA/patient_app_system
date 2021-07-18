@@ -24,7 +24,9 @@ const MainPage = () => {
 
   useEffect(() => {
     if (tableDataState.length === 0) return;
-  }, [tableDataState]);
+    if (isPopupDisplayed) return;
+    // do the display trick to refresh creation of table
+  }, [tableDataState,isPopupDisplayed]);
 
   // do smth about the usecallback here
   const getPatientAppointments = async (patientData) => {
@@ -78,7 +80,10 @@ const MainPage = () => {
       )}
 
       {isPopupDisplayed && (
-        <FixAppointmentPopup />
+        <FixAppointmentPopup
+          id={id}
+          toggleAppointmentPopup={toggleAppointmentPopup}
+        />
       )}
     </div>
   );
