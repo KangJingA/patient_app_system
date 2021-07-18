@@ -3,9 +3,10 @@ import { useTable, useSortBy } from "react-table";
 import { Columns } from "./Columns";
 
 import "./Table.css";
-const Table = (tableDataState) => {
+const Table = ({ tableDataState }) => {
+  console.log(tableDataState)
   const columns = useMemo(() => Columns, []);
-  const data = useMemo(() => tableDataState, []); 
+  const data = useMemo(() => tableDataState, [tableDataState]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(

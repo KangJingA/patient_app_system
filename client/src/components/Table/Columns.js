@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 export const Columns = [
   {
     Header: "Doctor ID",
@@ -25,8 +24,6 @@ export const Columns = [
   {
     Header: "Patient Gender",
     accessor: "patient_gender",
-    // Cell: ({ cell: { value } }) => {
-    //     return String(value) === "China" ? "Hey man" : "Fuck yess"}
   },
   {
     Header: "Appointment ID",

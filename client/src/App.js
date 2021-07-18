@@ -1,16 +1,17 @@
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Header from "./components/Header/Header";
-import { useEffect } from "react";
-// import AppointmentsService from "./services/appointments-service";
-import PatientService from "./services/patient-service";
-import DoctorService from "./services/doctor-service";
+import MainPage from "./components/Page/MainPage"
+// import { useEffect } from "react";
+// // import AppointmentsService from "./services/appointments-service";
+// import PatientService from "./services/patient-service";
+// import DoctorService from "./services/doctor-service";
 
 function App() {
   return (
     <div className="App">
       <Route path="/" component={Header}/>
-      <h1>Just a test</h1>
+      <Route path ="/main" component={MainPage}/>
     </div>
   );
 }
