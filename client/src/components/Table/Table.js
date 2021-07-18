@@ -4,7 +4,6 @@ import { Columns } from "./Columns";
 
 import "./Table.css";
 const Table = ({ tableDataState }) => {
-  console.log(tableDataState)
   const columns = useMemo(() => Columns, []);
   const data = useMemo(() => tableDataState, [tableDataState]);
 
@@ -17,7 +16,6 @@ const Table = ({ tableDataState }) => {
       useSortBy
     );
 
-  console.log(headerGroups);
   // thead: table head
   // tbody: table body
   // tr: table row -> put the cells in the rows

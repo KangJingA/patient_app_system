@@ -3,11 +3,13 @@ import { Switch, Route, Redirect, useParams } from "react-router-dom";
 import Table from "../Table/Table";
 import AppointmentsService from "../../services/appointments-service";
 import LoginService from "../../services/login-service";
+import QueryByDateForm from "../Form/QueryByDateForm";
+import "./MainPage.css";
 
 const MainPage = () => {
   let { id } = useParams();
   const [tableDataState, setTableDataState] = useState([]);
-  console.log(id);
+
   let isDoctor = id[0] === "D";
 
   useEffect(() => {
@@ -18,13 +20,15 @@ const MainPage = () => {
     }
   }, []);
 
+  useEffect(() =>{
+    if (tableDataState.length === 0) return;
+  }, [tableDataState])
+
   // do smth about the usecallback here
   const getPatientAppointments = async (patientData) => {
     const response = await AppointmentsService.getPatientAppointments(
       patientData
     );
-
-    console.log(response);
     setTableDataState(response);
   };
 
@@ -34,12 +38,37 @@ const MainPage = () => {
     );
     setTableDataState(response);
   };
-  
+
+  const handleBookAppointment = () => {
+    console.log("hi");
+  };
+
+  const handleDoctorDateQuery = (e) => {
+    e.preventDefault();
+    console.log(e);
+  };
   if (!LoginService.isLoggedIn()) {
     return <Redirect to="/login" />;
   }
   return (
-    <div>
+    <div className="MainPage">
+      <h2>Hello {id}</h2>
+      <div className="subheader">
+        <p>Your scheduled consultations:</p>
+        {!isDoctor && (
+          <button className="button" onClick={handleBookAppointment}>
+            Book an appointment
+          </button>
+        )}
+
+        {isDoctor && (
+          <QueryByDateForm
+            id ={id}
+            setTableDataState={setTableDataState}
+          ></QueryByDateForm>
+        )}
+      </div>
+
       {tableDataState.length === 0 ? (
         "Loading Data"
       ) : (
