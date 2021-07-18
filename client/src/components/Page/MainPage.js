@@ -26,9 +26,9 @@ const MainPage = () => {
 
   useEffect(() => {
     if (tableDataState.length === 0) return;
-    if (isPopupDisplayed) return;
+    if (!isPopupDisplayed) return;
     if (Object.getOwnPropertyNames(appointmentToDelete).length === 0) return;
-
+    console.log("rerendered");
     // do the display trick to refresh creation of table
   }, [tableDataState, isPopupDisplayed, appointmentToDelete]);
 

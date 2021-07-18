@@ -46,14 +46,14 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
     };
     console.log(data);
 
-    const result = await AppointmentsService.fixAppointment(data);
+    // const result = await AppointmentsService.fixAppointment(data);
 
-    if (typeof result === "string") {
-      console.log("error");
-    } else {
-      console.log("done");
-      toggleAppointmentPopup();
-    }
+    // if (typeof result === "string") {
+    //   console.log("error");
+    // } else {
+    //   console.log("done");
+    //   toggleAppointmentPopup();
+    // }
   };
 
   const getAllDoctors = async () => {
@@ -63,7 +63,7 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
   };
 
   return (
-    <>
+    <div>
       <form
         className="fixappointmentform"
         onSubmit={handleSubmit(handleDoctorDateQuery)}
@@ -101,11 +101,10 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
         <input
           className="button"
           type="submit"
-          onClick={handleDoctorDateQuery}
           value="Fix Appointment"
         ></input>
       </form>
-    </>
+    </div>
   );
 };
 
