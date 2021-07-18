@@ -1,27 +1,31 @@
 import "./App.css";
+import { Switch, Route, Redirect } from "react-router-dom";
+import Header from "./components/Header/Header";
 import { useEffect } from "react";
 // import AppointmentsService from "./services/appointments-service";
 import PatientService from "./services/patient-service";
 import DoctorService from "./services/doctor-service";
 
 function App() {
-  useEffect(async () => {
-    let data1 = { doctor_id: "D1" };
-    let result1 = await DoctorService.getDoctor(data1);
-    console.log(result1);
-
-    let data2 = { patient_id: "P4" };
-    let result2 = await PatientService.getPatient(data2);
-    console.log(result2);
-  });
   return (
     <div className="App">
+      <Route path="/" component={Header}/>
       <h1>Just a test</h1>
     </div>
   );
 }
 
 export default App;
+
+// useEffect(async () => {
+//   let data1 = { doctor_id: "D1" };
+//   let result1 = await DoctorService.getDoctor(data1);
+//   console.log(result1);
+
+//   let data2 = { patient_id: "P4" };
+//   let result2 = await PatientService.getPatient(data2);
+//   console.log(result2);
+// });
 
 // let patientData = { patient_id: "P2" };
 //     let result = await AppointmentsService.getPatientAppointments(patientData);
