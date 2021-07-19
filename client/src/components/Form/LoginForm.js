@@ -6,14 +6,13 @@ export const LoginForm = ({ setLoggedIn }) => {
   const { register, handleSubmit } = useForm();
 
   const [errorMsg, setErrorMsg] = useState("");
+
   const onSubmit = async ({ name, id, isDoctor }) => {
     const res = await LoginService.login(id, name, isDoctor);
-    console.log(res);
     if (typeof res === "string") {
       setErrorMsg(res);
       return;
     } else {
-      console.log(res);
       setLoggedIn(res);
     }
   };

@@ -35,6 +35,7 @@ const LoginService = {
     }
 
     if (typeof result === "string") return result;
+    console.log(result);
     this.setLoginDetails(isDoctor, result);
     return true;
   },

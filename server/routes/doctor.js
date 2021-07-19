@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Doctor = require("../model/doctor");
+const Doctor = require("../model/Doctor");
 
 const parseDoctor = async (doctor) => {
   return { doctor_id: doctor.doctor_id, doctor_name: doctor.doctor_name };

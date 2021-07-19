@@ -8,7 +8,6 @@ const headers = {
 const AppointmentsService = {
   async getPatientAppointments(data) {
     const url = apiUrl + "/patientAppointments";
-
     let result = await fetch(url, {
       method: "POST",
       headers: headers,
