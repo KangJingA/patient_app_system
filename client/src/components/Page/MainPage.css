@@ -1,3 +1,6 @@
+.MainPage{
+    padding:1.5rem;
+}
 .subheader {
     display: flex;
     justify-content: space-between;

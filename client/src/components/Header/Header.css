@@ -1,6 +1,7 @@
 .header {
   display: flex;
   justify-content: space-between;
+
 }
 .icon {
   height: 60px;

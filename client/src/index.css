@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height:100vh;
+  height: 100vh;
   width: 100vw;
 }
 
@@ -16,18 +16,21 @@ code {
 
 :root {
   --blue: #000080;
-  --pink: #FF5F5A;
+  --pink: #ff5f5a;
 }
 
 h1 {
   color: var(--blue);
 }
+
+p {
+  color: var(--pink);
+}
 .button {
   background: var(--pink);
   color: white;
-  border:none;
+  border: none;
   height: 30px;
   cursor: pointer;
   margin-top: 1rem;
 }
-

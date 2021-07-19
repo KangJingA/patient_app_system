@@ -1,24 +1,27 @@
 .wrapper {
-    height: inherit;
-  }
-  table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-    }
-  
-  thead th, td {
-      background-color: #789465;
-      color: white;
-  }  
-  
-  
-  td, th {
-  border: 1px solid #dddddd;
+  height: inherit;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead th,
+td {
+  background-color: #dddddd;
+  color: var(--blue);
+}
+
+td,
+th {
   text-align: center;
   padding: 8px;
-  }
-  
-  tr:nth-child(even) {
+}
+
+th {
+  border-bottom: 1px solid black;
+}
+tr:nth-child(even) {
   background-color: #dddddd;
-  }
+}

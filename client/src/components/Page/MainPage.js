@@ -11,6 +11,7 @@ import "./MainPage.css";
 
 const MainPage = () => {
   let { id } = useParams();
+  let username = window.sessionStorage.getItem("username");
   const [appointmentToDelete, setAppointmentToDelete] = useState({});
   const [tableDataState, setTableDataState] = useState([]);
   const [isPopupDisplayed, setIsPopupDisplayed] = useState(false);
@@ -60,7 +61,7 @@ const MainPage = () => {
       <Link to="/login">
         <Header />
       </Link>
-      <h2>Hello {id}</h2>
+      <h1>Hello {username}</h1>
       <div className="subheader">
         <p>Your scheduled consultations:</p>
         {!isDoctor && (

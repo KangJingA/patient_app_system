@@ -24,22 +24,21 @@ export const LoginForm = ({ setLoggedIn }) => {
         <div className="submit-container">
           <input
             className="login-input input-top"
-            name="name"
-            type="text"
-            placeholder="Name"
-            {...register("name", { required: true })}
-          />
-        </div>
-
-        <div className="submit-container">
-          <input
-            className="login-input input-bottom"
             name="id"
             placeholder="Id"
             {...register("id", { required: true })}
           />
         </div>
 
+        <div className="submit-container">
+          <input
+            className="login-input input-bottom"
+            name="name"
+            type="text"
+            placeholder="Name"
+            {...register("name", { required: true })}
+          />
+        </div>
         <div className="form-checkboxcontainer">
           <input
             className="checkbox"
@@ -53,8 +52,8 @@ export const LoginForm = ({ setLoggedIn }) => {
       </div>
 
       <input className="button" type="submit" value="Login" />
-    
-    {errorMsg && <p>{errorMsg}</p>}
+
+      {errorMsg && <p>{errorMsg}</p>}
     </form>
   );
 };
