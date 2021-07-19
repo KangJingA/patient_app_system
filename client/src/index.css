@@ -19,18 +19,22 @@ code {
   --pink: #ff5f5a;
 }
 
-h1 {
+h1,h4 {
   color: var(--blue);
 }
 
 p {
   color: var(--pink);
 }
+
 .button {
   background: var(--pink);
   color: white;
   border: none;
-  height: 30px;
+  height: 2rem;
   cursor: pointer;
   margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

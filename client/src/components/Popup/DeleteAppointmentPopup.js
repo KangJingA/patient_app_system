@@ -21,9 +21,9 @@ const DeleteAppointmentPopup = ({
   return (
     <div className="popup background-black">
       <div className="popup-card-container">
-        Cancel this appointment?
+        <h4>Cancel this appointment?</h4> 
         <div className="popup-button-container">
-          <div onClick={closeDeleteAppointmentPopup}>Cancel</div>
+          <div className="close" onClick={closeDeleteAppointmentPopup}>Cancel</div>
           <div className="button" onClick={deleteAppointment}>
             Delete
           </div>

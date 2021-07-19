@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className="header">
       <img className="icon" src={"/images/icon.svg"} alt=""></img>
-      <div className="button" onClick={logout}>
+      <div onClick={logout}>
         Logout
       </div>
     </div>

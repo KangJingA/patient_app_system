@@ -15,11 +15,6 @@
   border-radius: 0px 0px 10px 10px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-}
-
 .form-container {
   display: flex;
   justify-content: space-between;

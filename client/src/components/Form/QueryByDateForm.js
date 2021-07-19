@@ -19,13 +19,16 @@ const QueryByDateForm = ({ id, setTableDataState }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(handleDoctorDateQuery)}>
+      <form
+        className="form-container"
+        onSubmit={handleSubmit(handleDoctorDateQuery)}
+      >
         <input
           type="date"
-          //   ref={register({ required: true })}
           value={dateState}
           onChange={(e) => handleChange(e, setDateState)}
         ></input>
+        
         <input
           className="button"
           type="submit"

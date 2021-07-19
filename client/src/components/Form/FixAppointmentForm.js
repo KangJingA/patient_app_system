@@ -44,7 +44,7 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
       date: dateState,
       time: hrState,
     };
-    
+
     const res = await AppointmentsService.fixAppointment(data);
 
     if (typeof res === "string") {
@@ -62,56 +62,54 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(handleFixAppointment)}>
-        <div className="form-container">
-          <label>Time:</label>
-          <select
-            className="form-dropdown"
-            value={hrState}
-            onChange={(e) => handleChange(e, setHrState)}
-          >
-            {availHrs.map((hr) => {
-              return (
-                <option key={hr} value={hr}>
-                  {hr}
-                </option>
-              );
-            })}
-          </select>
-        </div>
+    <form onSubmit={handleSubmit(handleFixAppointment)}>
+      <div className="form-container">
+        <label>Time:</label>
+        <select
+          className="form-dropdown"
+          value={hrState}
+          onChange={(e) => handleChange(e, setHrState)}
+        >
+          {availHrs.map((hr) => {
+            return (
+              <option key={hr} value={hr}>
+                {hr}
+              </option>
+            );
+          })}
+        </select>
+      </div>
 
-        <div className="form-container">
-          <label>Date:</label>
-          <input
-            className="form-dropdown"
-            type="date"
-            value={dateState}
-            onChange={(e) => handleChange(e, setDateState)}
-          ></input>
-        </div>
+      <div className="form-container">
+        <label>Date:</label>
+        <input
+          className="form-dropdown"
+          type="date"
+          value={dateState}
+          onChange={(e) => handleChange(e, setDateState)}
+        ></input>
+      </div>
 
-        <div className="form-container">
-          <label>Doctor's Name: </label>
-          <select
-            value={doctorState}
-            onChange={(e) => handleChange(e, setDoctorState)}
-            className="form-dropdown"
-          >
-            {allDoctors.map((doctor) => {
-              return (
-                <option key={doctor.doctor_id} value={doctor.doctor_id}>
-                  {doctor.doctor_name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
+      <div className="form-container">
+        <label>Doctor's Name: </label>
+        <select
+          value={doctorState}
+          onChange={(e) => handleChange(e, setDoctorState)}
+          className="form-dropdown"
+        >
+          {allDoctors.map((doctor) => {
+            return (
+              <option key={doctor.doctor_id} value={doctor.doctor_id}>
+                {doctor.doctor_name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
 
-        <input className="button" type="submit" value="Fix Appointment"></input>
-        {errorMsg && <p>{errorMsg}</p>}
-      </form>
-    </div>
+      <input className="button" type="submit" value="Fix Appointment"></input>
+      {errorMsg && <p>{errorMsg}</p>}
+    </form>
   );
 };
 
