@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import DoctorService from "../../services/doctor-service";
 import AppointmentsService from "../../services/appointments-service";
 
-import "./FixAppointmentForm.css";
+import "./Form.css";
 
 const availHrs = [
   "8:00",
@@ -27,6 +27,7 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
   const [doctorState, setDoctorState] = useState("D1");
   const [dateState, setDateState] = useState("");
   const [hrState, setHrState] = useState("8:00");
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     getAllDoctors();
@@ -36,8 +37,7 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
     updateState(e.target.value);
   };
 
-  const handleDoctorDateQuery = async () => {
-    
+  const handleFixAppointment = async () => {
     const data = {
       patient_id: id,
       doctor_id: doctorState,
@@ -45,10 +45,10 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
       time: hrState,
     };
 
-    const result = await AppointmentsService.fixAppointment(data);
+    const res = await AppointmentsService.fixAppointment(data);
 
-    if (typeof result === "string") {
-      console.log("error");
+    if (typeof res === "string") {
+      setErrorMsg(res);
     } else {
       console.log("done");
       toggleAppointmentPopup();
@@ -63,11 +63,14 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit(handleDoctorDateQuery)}
-      >
-        <div>
-          <select value={hrState} onChange={(e) => handleChange(e, setHrState)}>
+      <form onSubmit={handleSubmit(handleFixAppointment)}>
+        <div className="form-container">
+          <label>Time:</label>
+          <select
+            className="form-dropdown"
+            value={hrState}
+            onChange={(e) => handleChange(e, setHrState)}
+          >
             {availHrs.map((hr) => {
               return (
                 <option key={hr} value={hr}>
@@ -77,30 +80,36 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
             })}
           </select>
         </div>
-        <input
-          type="date"
-          //   ref={register({ required: true })}
-          value={dateState}
-          onChange={(e) => handleChange(e, setDateState)}
-        ></input>
 
-        <select
-          value={doctorState}
-          onChange={(e) => handleChange(e, setDoctorState)}
-        >
-          {allDoctors.map((doctor) => {
-            return (
-              <option key={doctor.doctor_id} value={doctor.doctor_id}>
-                {doctor.doctor_name}
-              </option>
-            );
-          })}
-        </select>
-        <input
-          className="button"
-          type="submit"
-          value="Fix Appointment"
-        ></input>
+        <div className="form-container">
+          <label>Date:</label>
+          <input
+            className="form-dropdown"
+            type="date"
+            value={dateState}
+            onChange={(e) => handleChange(e, setDateState)}
+          ></input>
+        </div>
+
+        <div className="form-container">
+          <label>Doctor's Name: </label>
+          <select
+            value={doctorState}
+            onChange={(e) => handleChange(e, setDoctorState)}
+            className="form-dropdown"
+          >
+            {allDoctors.map((doctor) => {
+              return (
+                <option key={doctor.doctor_id} value={doctor.doctor_id}>
+                  {doctor.doctor_name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+
+        <input className="button" type="submit" value="Fix Appointment"></input>
+        {errorMsg && <p>{errorMsg}</p>}
       </form>
     </div>
   );
