@@ -25,3 +25,8 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.table-delete {
+  cursor: pointer;
+  font-weight: bold;
+}

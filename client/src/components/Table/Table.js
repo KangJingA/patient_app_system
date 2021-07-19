@@ -29,6 +29,7 @@ const Table = ({ tableDataState, setAppointmentToDelete }) => {
             Header: "",
             Cell: ({ row }) => (
               <div
+                className="table-delete"
                 onClick={(e) => {
                   setAppointmentToDelete(parseAppointment(row));
                 }}
