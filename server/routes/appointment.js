@@ -116,7 +116,6 @@ router.post("/doctorAppointments", async (req, res) => {
 
 // get all appointments for the given doctor and date
 router.post("/doctorAppointmentsByDate", async (req, res) => {
-  // smth to parse here
   const doctorAppointmentsByDate = await Appointment.aggregate([
     {
       $match: {
@@ -198,12 +197,3 @@ router.delete("/appointment", async (req, res) => {
 });
 
 module.exports = router;
-
-// $match: {
-//   doctor_id: "D1", // take from req.body
-//   appointment_date_time: {
-//     // take from req.body
-//     $gte: new Date("08 Mar 2018"),
-//     $lt: new Date("09 Mar 2018"),
-//   },
-// },
