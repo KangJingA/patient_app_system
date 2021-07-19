@@ -20,14 +20,11 @@ Patient Collection:
 - patient_gender:string
 - patient_blood_type:string
 
-
 Doctor Collection: 
 - doctor_id:string
 - doctor_name:string
 - doctor_rank:string
 - doctor_specialization:string
-
-
 
 Appointment Collection: 
 - appointmentID:string
