@@ -62,7 +62,7 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFixAppointment)}>
+    <form className="form-main" onSubmit={handleSubmit(handleFixAppointment)}>
       <div className="form-container">
         <label>Time:</label>
         <select

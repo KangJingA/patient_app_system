@@ -17,6 +17,14 @@ const QueryByDateForm = ({ id, setTableDataState }) => {
     setTableDataState(res);
   };
 
+  const getDoctorAppointments = async () => {
+    const doctorData = { doctor_id: id };
+    const response = await AppointmentsService.getDoctorAppointments(
+      doctorData
+    );
+    setTableDataState(response);
+  };
+
   return (
     <div>
       <form
@@ -28,12 +36,19 @@ const QueryByDateForm = ({ id, setTableDataState }) => {
           value={dateState}
           onChange={(e) => handleChange(e, setDateState)}
         ></input>
-        
+
         <input
           className="button"
           type="submit"
           onClick={handleDoctorDateQuery}
           value="Query by date"
+        ></input>
+
+        <input
+          className="button"
+          type="submit"
+          onClick={getDoctorAppointments}
+          value="Reset"
         ></input>
       </form>
     </div>

@@ -15,6 +15,11 @@
   border-radius: 0px 0px 10px 10px;
 }
 
+.form-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .form-container {
   display: flex;
   justify-content: space-between;
@@ -38,3 +43,5 @@
   height: 15px;
   width: 15px;
 }
+
+

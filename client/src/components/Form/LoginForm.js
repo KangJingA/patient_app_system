@@ -19,7 +19,7 @@ export const LoginForm = ({ setLoggedIn }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="form-main" onSubmit={handleSubmit(onSubmit)}>
       <div className="form-section">
         <div className="submit-container">
           <input
