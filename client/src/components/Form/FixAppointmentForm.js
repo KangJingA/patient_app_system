@@ -44,7 +44,7 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
       date: dateState,
       time: hrState,
     };
-
+    
     const res = await AppointmentsService.fixAppointment(data);
 
     if (typeof res === "string") {

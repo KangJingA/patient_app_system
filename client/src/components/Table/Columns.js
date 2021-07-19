@@ -32,8 +32,8 @@ export const Columns = [
   {
     Header: "Appointment Time",
     accessor: "appointment_date_time",
-    // Cell: ({ cell: { value } }) => {
-    //     return String(value) === "China" ? "Hey man" : "Fuck yess"}
+    Cell: ({ cell: { value } }) => {
+        return new Date(value).toLocaleString();}
   },
   // include delete button here?
 ];
