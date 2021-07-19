@@ -64,7 +64,6 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
   return (
     <div>
       <form
-        className="fixappointmentform"
         onSubmit={handleSubmit(handleDoctorDateQuery)}
       >
         <div>

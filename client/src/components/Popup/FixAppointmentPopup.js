@@ -3,7 +3,10 @@ import FixAppointmentForm from "../../components/Form/FixAppointmentForm";
 const FixAppointmentPopup = ({ toggleAppointmentPopup, id }) => {
   return (
     <div className="popup background-white">
-      Fix appointment
+      <div className="close" onClick={toggleAppointmentPopup}>
+        Close
+      </div>
+      <h1>Fix an Appointment</h1>
       <FixAppointmentForm
         id={id}
         toggleAppointmentPopup={toggleAppointmentPopup}
