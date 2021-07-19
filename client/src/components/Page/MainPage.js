@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, Link } from "react-router-dom";
+import Header from "../../components/Header/Header";
 import FixAppointmentPopup from "../../components/Popup/FixAppointmentPopup";
 import DeleteAppointmentPopup from "../../components/Popup/DeleteAppointmentPopup";
 import Table from "../Table/Table";
@@ -17,20 +18,16 @@ const MainPage = () => {
   let isDoctor = id[0] === "D";
 
   useEffect(() => {
+    if (isPopupDisplayed) return;
+    if (Object.getOwnPropertyNames(appointmentToDelete).length !== 0) return;
+    console.log("rerendered");
+
     if (isDoctor) {
       getDoctorAppointments({ doctor_id: id });
     } else {
       getPatientAppointments({ patient_id: id });
     }
-  }, []);
-
-  useEffect(() => {
-    if (tableDataState.length === 0) return;
-    if (!isPopupDisplayed) return;
-    if (Object.getOwnPropertyNames(appointmentToDelete).length === 0) return;
-    console.log("rerendered");
-    // do the display trick to refresh creation of table
-  }, [tableDataState, isPopupDisplayed, appointmentToDelete]);
+  }, [isPopupDisplayed, appointmentToDelete]);
 
   // do smth about the usecallback here
   const getPatientAppointments = async (patientData) => {
@@ -60,6 +57,9 @@ const MainPage = () => {
   }
   return (
     <div className="MainPage">
+      <Link to="/login">
+        <Header />
+      </Link>
       <h2>Hello {id}</h2>
       <div className="subheader">
         <p>Your scheduled consultations:</p>

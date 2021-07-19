@@ -44,16 +44,15 @@ const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
       date: dateState,
       time: hrState,
     };
-    console.log(data);
 
-    // const result = await AppointmentsService.fixAppointment(data);
+    const result = await AppointmentsService.fixAppointment(data);
 
-    // if (typeof result === "string") {
-    //   console.log("error");
-    // } else {
-    //   console.log("done");
-    //   toggleAppointmentPopup();
-    // }
+    if (typeof result === "string") {
+      console.log("error");
+    } else {
+      console.log("done");
+      toggleAppointmentPopup();
+    }
   };
 
   const getAllDoctors = async () => {

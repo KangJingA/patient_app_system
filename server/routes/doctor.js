@@ -28,7 +28,7 @@ router.post("/getDoctor", async (req, res) => {
   });
 
   if (!doctor) {
-    res.statusMessage = "invalid name and id";
+    res.statusMessage = "invalid name or id";
     return res.status(403).end(); // 403 forbidden cos login
   }
 

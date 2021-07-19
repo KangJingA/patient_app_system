@@ -14,11 +14,20 @@ code {
     monospace;
 }
 
+:root {
+  --blue: #000080;
+  --pink: #FF5F5A;
+}
+
+h1 {
+  color: var(--blue);
+}
 .button {
-  background: #ff5f5a;
+  background: var(--pink);
   color: white;
-  /* width: 245px; */
   border:none;
   height: 30px;
   cursor: pointer;
+  margin-top: 1rem;
 }
+
