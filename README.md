@@ -32,8 +32,9 @@ Appointment Collection:
 - doctor_id:string
 - patient_id:string
 
-Web application is deployed on :
-The backend is deployed on:
+Web application is deployed on : https://patient-appointment-system.netlify.app/login
+
+The backend is deployed on: https://kangjinga-appointment-system.herokuapp.com/
 
 ## Getting started
 
