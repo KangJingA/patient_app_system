@@ -34,7 +34,7 @@ const Table = ({ tableDataState, setAppointmentToDelete }) => {
                   setAppointmentToDelete(parseAppointment(row));
                 }}
               >
-                Delete
+                Cancel
               </div>
             ),
           },

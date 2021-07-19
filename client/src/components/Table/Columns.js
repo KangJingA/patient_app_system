@@ -1,17 +1,12 @@
 export const Columns = [
   {
     Header: "Doctor ID",
-    accessor: "doctor_id", // access row  data based on the key
-    disableSortBy: true, // disable sorting
+    accessor: "doctor_id", 
+    disableSortBy: true, 
   },
   {
     Header: "Doctor Name",
     accessor: "doctor_name",
-    // Cell: ( props ) => {
-    //     return (
-    //         <button onClick={(e)=>console.log(props)}>{props.value}</button>
-    //     )
-    // }
   },
   {
     Header: "Patient ID",
@@ -35,5 +30,4 @@ export const Columns = [
     Cell: ({ cell: { value } }) => {
         return new Date(value).toLocaleString();}
   },
-  // include delete button here?
 ];
