@@ -8,9 +8,7 @@ const LoginPage = () => {
   
   const [loggedIn, setLoggedIn] = useState(false);
 
-
   if (loggedIn) {
-    console.log("this is run");
     return <Redirect to={"/" + LoginService.getID()} />;
   }
 

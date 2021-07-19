@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import AppointmentsService from "../../services/appointments-service";
 
 const QueryByDateForm = ({ id, setTableDataState }) => {
-  const { register, handleSubmit } = useForm({
+  const { handleSubmit } = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
   });

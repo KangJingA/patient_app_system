@@ -19,7 +19,7 @@ const availHrs = [
 
 const FixAppointmentForm = ({ id, toggleAppointmentPopup }) => {
   console.log("render");
-  const { register, handleSubmit } = useForm({
+  const { handleSubmit } = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
   });

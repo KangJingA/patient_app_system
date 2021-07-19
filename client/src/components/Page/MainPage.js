@@ -21,14 +21,13 @@ const MainPage = () => {
   useEffect(() => {
     if (isPopupDisplayed) return;
     if (Object.getOwnPropertyNames(appointmentToDelete).length !== 0) return;
-    console.log("rerendered");
 
     if (isDoctor) {
       getDoctorAppointments({ doctor_id: id });
     } else {
       getPatientAppointments({ patient_id: id });
     }
-  }, [isPopupDisplayed, appointmentToDelete]);
+  }, [isPopupDisplayed, appointmentToDelete, id, isDoctor]);
 
   // do smth about the usecallback here
   const getPatientAppointments = async (patientData) => {
